@@ -16,32 +16,62 @@
 
   <!-- include source files here... -->
   <script src="jasmine-standalone-4.2.0/src/CRUDfunc.js"></script>
-  <script src="jasmine-standalone-4.2.0/src/Song.js"></script>
+  <script src="jasmine-standalone-4.2.0/src/Contact.js"></script>
+
 </head>
 
 <body>
+
+  <!-- fake night mode screen -->
+  <div id="FakeNightMode" style="
+    position: fixed; pointer-events: none; 
+    top: 0; left: 0; width: 100vw; height: 100vh; 
+    background-color: white; 
+    mix-blend-mode: difference; 
+    z-index: 1; opacity: 0;
+    transition: opacity 0.4s linear 0s;">
+  </div>
+
+  <!-- Content -->
   <div class="container p-3">
-      
-    <!-- Intro text -->
     <div class="w-100 p-5 bg-light border border-1 rounded-3" style="min-width: min-content;">
-      <h1 class="display-3">Contact manager 
-        <i style="height: calc(1.525rem + 3.3vw);vertical-align: text-bottom;" class="bi bi-people"></i>
-      </h1>
-      <p class="text-muted">Select New contact to add new one or Contacts to see all saves.</p>
+
+      <!-- Intro text -->
+      <div class="container" id="IntroApp">
+        <h1 class="display-3">Contact manager 
+          <i style="height: calc(1.525rem + 3.3vw);vertical-align: text-bottom;" class="bi bi-people"></i>
+        </h1>
+        <p class="text-muted"><em>Select New contact to add new one or Contacts to see all saves.</em></p>
+      </div>
 
       <div class="d-flex align-items-start">
-
         <!-- Nav bar -->
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <button class="nav-link active" id="v-pills-contacts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contacts" type="button" role="tab" aria-controls="v-pills-contacts" href="#first" aria-selected="true">
+          <button class="nav-link active" id="v-pills-contacts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contacts" type="button" role="tab" aria-controls="v-pills-contacts" aria-selected="true">
             Contacts
           </button>
-          <button class="nav-link" id="v-pills-new-contact-tab" data-bs-toggle="pill" data-bs-target="#v-pills-new-contact" type="button" role="tab" aria-controls="v-pills-new-contact" href="#s" aria-selected="false">
+          <button class="nav-link" id="v-pills-contact-form-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contact-form" type="button" role="tab" aria-controls="v-pills-contact-form" aria-selected="false">
             New contact
           </button>
-          <button class="nav-link" id="v-pills-tests-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tests" type="button" role="tab" aria-controls="v-pills-tests" href="#t" aria-selected="false">
+          <button class="nav-link" id="v-pills-tests-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tests" type="button" role="tab" aria-controls="v-pills-tests" aria-selected="false">
             Jasmine tests
           </button>
+
+          </br></br>
+
+          <!-- Fake dark mode button -->
+          <div class="row" style="display:flex; flex-wrap: nowrap;" aria-label="toggle day-night mode">
+            <div class="col" aria-label="night mode">
+              <i class="bi bi-moon-stars"></i>
+            </div>
+            <div class="col form-switch px-0">
+              <input class="form-check-input mx-0" type="checkbox" role="switch" id="DayNightModeButton" onclick="changeTheme();" style="background-color: #ffa50061;border-color: #ffa500;" checked>
+              <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+            </div>
+            <div class="col" aria-label="day mode">
+              <i class="bi bi-sun"></i>
+            </div>
+          </div>
         </div>
 
         <div class="vr"></div>
@@ -51,8 +81,8 @@
 
           <!-- Contact Table-->
           <div class="tab-pane fade show active" id="v-pills-contacts" role="tabpanel" aria-labelledby="v-pills-contacts-tab">           
-              <table id="DynamicContactTable" class="table table-dark table-striped" style="text-align: center;">
-                <thead>
+              <table id="DynamicContactTable" class="table table-light table-striped" style="text-align: center;">
+                <thead class="table-dark">
                   <tr>
                     <th>Name</th>
                     <th>First surname</th>
@@ -63,7 +93,7 @@
                   </tr>
                 </thead>
                 <!-- Dynamic content via javascript -->
-                <tbody>
+                <tbody id="DynamicContactTable-tbody">
                   <tr id="12345" >
                     <td>ExName</td>
                     <td>Ex1Sur</td>
@@ -71,7 +101,7 @@
                     <td>Ex@mail.com</td>
                     <td>"phone"</td>
                     <td style="display: flex;justify-content: center;">
-                      <button type="button" class="btn btn-outline-warning btn-sm mx-1" onclick="document.getElementById('v-pills-new-contact-tab').click();alert(this.parentNode.parentNode.id);">
+                      <button type="button" class="btn btn-outline-success btn-sm mx-1" onclick="document.getElementById('v-pills-contact-form-tab').click();alert(this.parentNode.parentNode.id);">
                         <i class="bi bi-pencil"></i>
                         Edit
                       </button>
@@ -84,25 +114,40 @@
                 </tbody>
               </table>
 
+            </br> </br>
+            <div class="container">
+              <button type="button" class="btn btn-danger btn-sm mx-1" onclick="localStorage.clear()">
+                <i class="bi bi-exclamation-octagon"></i>
+                Delete all app data
+              </button>
+            </div>
+
           </div>
 
           <!-- Contact Form -->
-          <div class="flex-grow-1 tab-pane fade" id="v-pills-new-contact" role="tabpanel" aria-labelledby="v-pills-new-contact-tab" style="min-width: 150px;">
-            <h3> Enter the next information to register a new contact </h3>
+          <div class="flex-grow-1 tab-pane fade" id="v-pills-contact-form" role="tabpanel" aria-labelledby="v-pills-contact-form-tab" style="min-width: 150px;">
+            <h3> Fill the next information to save a contact </h3>
             </br>
-            <form id="ContactForms" onsubmit="console.log(this);location.reload();" width="100%">
+            <form id="ContactForms" class="needs-validation" onsubmit="console.log(this);passValidation();return false" width="100%" novalidate>
               <!-- name + phone -->
               <div class="row g-4 mb-2">
                 <div class="col-md-7">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="inputName" placeholder="Name" required>
+                    <input type="text" class="form-control" id="inputName" placeholder="Name"  pattern="^.{1,30}$" required>
                     <label for="inputName">Name</label>
+                    <div class="valid-feedback"></div>
+                    <div class="invalid-feedback">
+                      Length must be between 1 - 30 characters
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-5">
                   <div class="form-floating">
                     <input type="tel" class="form-control" id="inputPhone" placeholder="+ 569 1111 1111" pattern="\+[0-9]{2} [0-9]{9}" required>
-                    <label for="inputPhone">Phone number | +xx xxxxxxxxx</label>
+                    <label for="inputPhone">Phone number</label>
+                    <div class="invalid-feedback">
+                      Number must follow pattern, ex: +12 123456789
+                    </div>
                   </div>
                 </div>
               </div>
@@ -110,42 +155,61 @@
               <div class="row g-4 mb-2">
               <div class="col-md">
                 <div class="form-floating">
-                  <input type="text" class="form-control" id="inputSurname1" placeholder="First surname" required>
+                  <input type="text" class="form-control" id="inputSurname1" placeholder="First surname" pattern="^.{1,30}$" required>
                   <label for="inputSurname1">First surname</label>
+                  <div class="valid-feedback"></div>
+                  <div class="invalid-feedback">
+                    Length must be between 1 - 30 characters
+                  </div>
                 </div>
               </div>
               <div class="col-md">
                 <div class="form-floating">
-                  <input type="text" class="form-control" id="inputSurname2" placeholder="Second surname" required>
+                  <input type="text" class="form-control" id="inputSurname2" placeholder="Second surname" pattern="^.{1,30}$" required>
                   <label for="inputSurname2">Second surname</label>
+                  <div class="valid-feedback"></div>
+                  <div class="invalid-feedback">
+                    Length must be between 1 - 30 characters
+                  </div>
                 </div>
               </div>
               </div>
               <!-- mail -->
               <div class="mb-3">
               <div class="form-floating">
-                <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                <input type="text" class="form-control" id="inputEmail" placeholder="name@example.com" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required>
                 <label for="inputEmail">Email address | chars@chars.domain</label>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">
+                  Pattern must be ^[^\s@]+@[^\s@]+\.[^\s@]+$
+                </div>
               </div>
               </div>
               <!-- submit button -->
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-outline-primary" type="submit"> 
-                  Save contact
-                  <i class="bi bi-send" style="vertical-align: inherit;"></i>
+                <button class="btn btn-outline-primary" type="submit" onclick="formValidationBootstrap()"> 
+                  Save contact <i class="bi bi-upload ps-3" style="vertical-align: inherit;"></i>
                 </button>
               </div>
               </form>
           </div>
 
-          <!-- Jasmine Tests -->
+          <!-- Jasmine Tests should load at last -->
           <div class="flex-grow-1 tab-pane fade" id="v-pills-tests" role="tabpanel" aria-labelledby="v-pills-tests-tab" style="min-width: max-content;">
-            <iframe title="JasmineTests" width="100%" height="290px" src="TestRunner.html"></iframe>
+            <iframe title="JasmineTests" id="JasmineTestIframe" width="100%" height="290px" src="TestRunner.html" ></iframe>
+            <a class="mx-auto" href="TestRunner.html" target="_blank" rel="noopener noreferrer">Open tests in a new tab</a>
           </div>
         </div>
       </div>
     </div>
 
   </div>
+
 </body>
+
+<script>
+  // load init things settings (here otherwise load double, here + iframe testing)
+  window.onload = loadDeferred;
+</script>
+  
 </html>

@@ -1,5 +1,5 @@
 # Tarea-2-INF331-UTFSM
-Aplicativo web para administrar contactos (CRUD) relizado en javascript y testeado via web mediante el standalone Jasmine.
+Pruebas a aplicativo web de administración de contactos relizado en javascript y HTML + bootstrap5 usando el standalone de Jasmine.
 
 ## Requerimientos / Manual de instalación:
 Su navegador preferido que permita la ejecución de javascript.
@@ -8,7 +8,7 @@ Su navegador preferido que permita la ejecución de javascript.
 Para pruebas:
 - Abrir el archivo *TestRunner.html* 
 
-Para el aplicativo:
+Para el aplicativo (contiene una pestaña con las pruebas incorporadas):
 - Abrir el archivo *ContactManager.html*
 
 ## Como contribuir
