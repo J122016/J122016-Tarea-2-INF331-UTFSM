@@ -1,8 +1,34 @@
-// TODO : functions logic, integration & tests
+/* TODO : 
+Bugs
+- [required] CRUDremoveContactRow() & CRUDeditContactRow() working func no pass tests, document don't exist in jasmine test...
+- [required] Delete test contact entries with beforeEach? or deactivate iframe.
 
-/* === Integration CRUD storage-front functions === */
+Improvements:
+- [required] Improve test data cases like 'phone' or email not follow pattern
+- [optional?] test Utils/integration/front functions
+- [optional? UI] Fix front typos & messages regex
+- [optional UX] Add toast for correct transactions
+- [optional UI] Fix some buttons/links
+- [internal] improve some functions logic
+- [internal] separe style in html, make a custom css file
+*/
 
-// READ, ADD, UPDATE, DELETE 
+
+/* === Integration/middle CRUD storage-front functions === */
+
+function triggerDelete(key) {
+    // try and catch --> toast : https://getbootstrap.com/docs/5.2/components/toasts/
+    let tableContacts = document.getElementById('DynamicContactTable');
+    CRUDremoveContactRow(key, tableContacts);
+    CRUDdeleteContactLocalStorage(key);
+    return;
+}
+
+function triggerEdit(key) {
+    CRUDeditAutoFill(CRUDreadContactLocalStorage(key), document.getElementById("ContactForms"));
+    document.getElementById('v-pills-contact-form-tab').click()
+    // next (save) is merged with only form, worked in function passValidation
+}
 
 
 /* === CRUD storage functions === */
@@ -18,20 +44,32 @@
  */
 function CRUDcreate(name,surname1,surname2,phone,email) {
     contact = new Contact(name,surname1,surname2,phone,email);
-    //console.log(contact);
     // call save func ?
     return contact;
 };
 
 /**
- * Update a contact from local storage using using a key (*phone*)
- * @param  {String} key Key to retrive the local storage contact
+ * Update a contact from local storage
+ * @param  {String} key key of the contact in localStorage (*phone*)
+ * @param  {Contact} newContactData new contact data to save
  * @return {Boolean}    result of the operation (false if new id/phone already exist)
  */
-function CRUDupdateContact(key, newContactData){
-    throw new Error('Method updateContact not implemented.');
-    // search and replace incuding key
-    // see case key exist and no old one => NO ... or save new one
+function CRUDupdateContact(key, newContactData) {
+    //default: diferent key, and there is conflict with other => not unique
+    let correctUpdate = false;
+
+    if (key === newContactData.phone) {
+        // replace value, same key
+        saveContactLocalStorage(newContactData)
+        correctUpdate = true;
+    } else if (CRUDreadContactLocalStorage(newContactData) === null) {
+        // diferent key and no conflict with others saved before
+        CRUDdeleteContactLocalStorage(key)
+        saveContactLocalStorage(newContactData)
+        correctUpdate = true;
+    }
+
+    return correctUpdate;
 };
 
 /**
@@ -39,15 +77,15 @@ function CRUDupdateContact(key, newContactData){
  * @param  {String} key Key to retrive the local storage contact
  * @return {Contact}      Contact found if exist or undefined
  */
-function CRUDreadContactLocalStorage(contact){
-    throw new Error('Method loadContactLocalStorage not implemented.');
-    //search & de-stringify
+function CRUDreadContactLocalStorage(key){
+    //search & parse object
+    let contact = JSON.parse(localStorage.getItem(key))
+    return contact;
 };
 
 /**
  * Delete a contact from local storage using using a key (*phone*)
  * @param  {String} key Key to retrive the local storage contact
- * @return {Contact}      Contact found if exist or undefined
  */
 function CRUDdeleteContactLocalStorage(key){
     localStorage.removeItem(key);
@@ -60,6 +98,7 @@ function CRUDdeleteContactLocalStorage(key){
  * @return {Boolean}      Result of save in local storage
  */
 function saveContactLocalStorage(contact){
+    // improve later: add parameter key, now .phone as default
     var isSave = false;
     try{
         localStorage.setItem(contact.phone, JSON.stringify(contact));
@@ -70,15 +109,39 @@ function saveContactLocalStorage(contact){
     return isSave
 };
 
+
 /* === CRUD front functions === */
 
 /**
  * Add a contact into html table, DynamicContactTable in theory
- * @param  {Contact} contact Contact to add in register
+ * @param  {Contact} contact Contact to add in table
  * @param  {Element} table table to insert the new row
  */
 function CRUDaddContactRow(contact, table){
-    throw new Error('Method CRUDaddContactRow not implemented.');
+    var row = table.insertRow(1);
+    row.id = contact.phone // id or key
+
+    var nameCell = row.insertCell(0);
+    var surname1Cell = row.insertCell(1);
+    var surname2Cell = row.insertCell(2);
+    var emailCell = row.insertCell(3);
+    var phoneCell = row.insertCell(4);
+    var actionsCell = row.insertCell(5);
+    actionsCell.style = "display: flex;justify-content: center;"
+
+    nameCell.innerHTML = contact.name;
+    surname1Cell.innerHTML = contact.surname1;
+    surname2Cell.innerHTML = contact.surname2;
+    emailCell.innerHTML = contact.email;
+    phoneCell.innerHTML = contact.phone;
+    actionsCell.innerHTML = `
+        <button type='button' class='btn btn-outline-success btn-sm mx-1' onclick='triggerEdit(this.parentNode.parentNode.id)'>
+            <i class='bi bi-pencil'></i> Edit 
+        </button>
+        <button type='button' class='btn btn-outline-danger btn-sm mx-1' onclick='triggerDelete(this.parentNode.parentNode.id)'>
+            <i class='bi bi-trash'></i> Delete
+        </button>`;
+    return;
 };
 
 /**
@@ -86,8 +149,11 @@ function CRUDaddContactRow(contact, table){
  * @param  {String} key Id/phone of contact to be removed
  * @param {Element} table  table to remove the contact
  */
-function CRUDremoveContactRow(key, table){
-    throw new Error('Method CRUDremoveContactRow not implemented.');
+function CRUDremoveContactRow(key, table){  
+    //console.log(table,key, document);
+    rowIndex = document.getElementById(key).rowIndex; // improve to work without getElementbyId, jasmine not work properly
+    table.deleteRow(rowIndex);
+    return;
 };
 
 /**
@@ -97,7 +163,9 @@ function CRUDremoveContactRow(key, table){
  * @param {Element} table Table to edit
  */
 function CRUDeditContactRow(oldKey, newContactData, table){
-    throw new Error('Method CRUDeditContactRow not implemented.');
+    CRUDremoveContactRow(oldKey,table);
+    CRUDaddContactRow(newContactData,table);
+    return;
 };
 
 /**
@@ -106,7 +174,12 @@ function CRUDeditContactRow(oldKey, newContactData, table){
  * @param {Element} form    Form to be filled with contact data
  */
 function CRUDeditAutoFill(contact, form){
-    throw new Error('Method CRUDeditAutoFill not implemented.');
+    form['inputName'].value = contact.name;
+    form['inputSurname1'].value = contact.surname1;
+    form['inputSurname2'].value = contact.surname2;
+    form['inputPhone'].value = contact.phone;
+    form['inputEmail'].value = contact.email;
+    return;
 };
 
 
@@ -121,6 +194,21 @@ function loadDeferred() {
         document.getElementById('FakeNightMode').style.opacity = 1;
         document.getElementById("DayNightModeButton").checked = false;
     }
+
+    // render contacts from localStorage
+    for (var i = 0; i < localStorage.length; i++) {
+
+        // set iteration key name
+        var key = localStorage.key(i);
+        if (key !== 'NightMode'){
+            // use key name to retrieve the corresponding value
+            var value = CRUDreadContactLocalStorage(key);
+
+            //render
+            var tableContacts = document.getElementById("DynamicContactTable");
+            CRUDaddContactRow(value, tableContacts)
+        }      
+      }
 };
 
 // Change & save app theme
@@ -134,44 +222,55 @@ function changeTheme(){
     }
 };
 
-// Validation trigger save+
+// Validation + save integration - manual tested, internals calls with jasmine
 function passValidation() {
-    const forms = document.querySelectorAll('.needs-validation')
-    var pass = true;
-    Array.from(forms).forEach(form => {
-        if (!form.checkValidity()) {
-            pass = false
-        }
-    });
-    if (pass) {
-        //guardar : localStorage.setItem(phone, others);
-        //quitar feedback : form.classList.remove('was-validated')
-        //limpiar campos : form.reset()
-        //document.getElementById('v-pills-contacts-tab').click();
+    // Get form
+    contactFormHTML = document.getElementById("ContactForms");
+
+    // default validation
+    let pass = true;
+    document.getElementsByClassName("invalid-feedback-unique-phone")[0].innerText = '';
+    let possibleConflictKey = CRUDreadContactLocalStorage(contactFormHTML['inputPhone'].value) !== null;
+
+    if (!contactFormHTML.checkValidity()) {
+        // patterns not pass
+        contactFormHTML.classList.add('was-validated');
+        pass = false;
     }
-    return pass;
-};
-
-// Bootstrap form feedback trigger
-function formValidationBootstrap() {
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-    'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-          console.log(event)
+    else if (possibleConflictKey){
+        // number already register
+        let msg = "Phone already exist.\Do you wish overwrite contact?, otherwise cancel."
+        if (confirm(msg) === false) {
+            document.getElementsByClassName("invalid-feedback-unique-phone")[0].style.display = 'block';
+            document.getElementsByClassName("invalid-feedback-unique-phone")[0].innerText = String(contactFormHTML['inputPhone'].value) + ' already registered.';
+            pass = false;
         }
+    }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
+    if (pass) {
+        //pass - create or edit
+        var contact = CRUDcreate(contactFormHTML['inputName'].value,
+                                contactFormHTML['inputSurname1'].value,
+                                contactFormHTML['inputSurname2'].value,
+                                contactFormHTML['inputPhone'].value,
+                                contactFormHTML['inputEmail'].value);
+        //save
+        saveContactLocalStorage(contact);
+
+        // render
+        var tableContacts = document.getElementById("DynamicContactTable");
+        if(!possibleConflictKey){
+            // Add new entry
+            CRUDaddContactRow(contact, tableContacts);
+        }else{
+            // Edit old entry, accepted before
+            CRUDeditContactRow(contact.phone, contact, tableContacts)
+        }
+        document.getElementById('v-pills-contacts-tab').click();
+
+        //clean
+        contactFormHTML.classList.remove('was-validated');
+        contactFormHTML.reset();
+    }
+    return;
 };

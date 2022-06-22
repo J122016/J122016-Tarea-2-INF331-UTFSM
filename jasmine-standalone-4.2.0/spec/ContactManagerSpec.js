@@ -74,11 +74,12 @@ describe("ContactManager", function() {
     describe("when have contacts saved before", function(){
       beforeEach(function() {
         saveContactLocalStorage(contact) //assuming will pass
-        contactSelected = new Contact('NEWname','surname22','surname22','phone','NEWemail'); // known is real
+        contactEdited = new Contact('NEWname','surname22','surname22','phone','NEWemail'); // known is real
+        contactInexistent = new Contact('NEWname','surname22','surname22','phoneX','NEWemail'); // known is real
       });
 
       // test read - ok
-      it("should be able to read an 'old' contact from local storage",function() {
+      it("should be able to read a contact from local storage",function() {
         load1Contact = CRUDreadContactLocalStorage(contact.phone); // function to test
   
         //tests evaluations => expected function to test to be real
@@ -89,27 +90,23 @@ describe("ContactManager", function() {
         expect(load1Contact.phone).toEqual(contact.phone);
         expect(load1Contact.email).toEqual(contact.email);
 
-        // test 2: non-existing contact (should not happen but... if not required/works=> change/delete test)
-        load2Contact = CRUDreadContactLocalStorage(contactSelected.phone);
-        expect(load2Contact.name).toBeNull();
-        expect(load2Contact.surname1).toBeNull();
-        expect(load2Contact.surname2).toBeNull();
-        expect(load2Contact.phone).toBeNull();
-        expect(load2Contact.email).toBeNull();
+        // test 2: non-existing contact (should not happen but...)
+        load2Contact = CRUDreadContactLocalStorage(contactInexistent.phone);
+        expect(load2Contact).toBeNull();
 
       });
 
       // test update - ok?
-      it("should be able to update an existing contact in local storage",function() { 
-        updateInfo = contactSelected // known is real from sub-context
-        updateContact = CRUDupdateContact(contact.phone, updateInfo); // function to test
+      it("should be able to update an existing contact in local storage",function() {
+        updateContact = CRUDupdateContact(contact.phone, contactEdited); // function to test
+        //inexistent contact not tested bc no existent, isn't ?
 
         // test 1: same phone
-        if (contact.phone === updateInfo.phone){
+        if (contact.phone === contactEdited.phone){
           expect(updateContact).toBeTruthy()
         }
         // test 2: change phone to an new one
-        else if (localStorage.getItem(updateInfo.phone) === null) {
+        else if (localStorage.getItem(contactEdited.phone) === null) {
           expect(updateContact).toBeTruthy()
         }
         // test 3: change phone but exist in the list and not same contact (case 1)
@@ -119,13 +116,13 @@ describe("ContactManager", function() {
       });
 
       // test delete - ok
-      it("should be able to delete an 'existing' specific contact in local storage",function() {
+      it("should be able to delete an specific contact in local storage",function() {
         // function to test
-        CRUDdeleteContactLocalStorage(contactSelected.phone); //apply to inexistent save
+        CRUDdeleteContactLocalStorage(contactInexistent.phone); //apply to inexistent save
         CRUDdeleteContactLocalStorage(contact.phone); //apply to existent save
 
         //tests
-        expect(localStorage.getItem(contactSelected.phone)).toBeNull();
+        expect(localStorage.getItem(contactInexistent.phone)).toBeNull();
         expect(localStorage.getItem(contact.phone)).toBeNull();
       });
     })
@@ -135,21 +132,22 @@ describe("ContactManager", function() {
   /* === CRUD front contacts === */
   describe("Front Format Utils", function() {
     beforeEach(function() {
-      // generate dummy html table
-      var contactTableHTML = document.createElement('table');
-      //document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(tableRows); // unused for now...
+      // generate mock html table
+      contactTableHTML = document.createElement('table');
+      contactTableHTML.insertRow(0); //header default
       contact = new Contact('name','surname1','surname2','phone','email'); // must have
     });
 
     // create new row - ok
-    it("should be able to add a new row (last one) to contacts table",function() {
+    it("should be able to add a new row (first one) to contacts table",function() {
       // function to test
       CRUDaddContactRow(contact, contactTableHTML); 
       //'-> html of Table, contactTableHTML, not required in theory (get by unique Id), but for test reasons add as param in func
+      var rowToInspect = contactTableHTML.rows.namedItem(contact.phone);
 
       //test: verify all cells values
-      for (let index = 0; index < contactTableHTML.children.length; index++) {
-        expect(contactTableHTML.children[index].innerText).toBeEqual(contact[Object.values(contact)[index]]);
+      for (let index = 0; index < rowToInspect.children.length-1; index++) {
+        expect(rowToInspect.children[index].innerText).toEqual(contact[Object.values(contact)[index]]);
       };
     });
 
@@ -164,20 +162,21 @@ describe("ContactManager", function() {
       // remove row - ok
       it("should be able to remove a contact row of the contacts table",function() {
         // func to test
-        CRUDremoveContactRow(contactSelected.phone, contactTableHTML);
+        CRUDremoveContactRow(contact.phone, contactTableHTML);
 
         //test
-        expect(contactTableHTML.rows.namedItem(contactSelected.phone)).toBeNull(); //again phone as id/key
+        expect(contactTableHTML.rows.namedItem(contact.phone)).toBeNull(); //again phone as id/key
       });
 
       // edit cells - ok
       it("should be able to apply edits to an old contact, row in table",function() {
         //function to test
         CRUDeditContactRow(contact.phone, contactSelected, contactTableHTML); // idea: remove + delete?
+        var rowToInspect = contactTableHTML.rows.namedItem(contactSelected.phone);
 
         //test 1 re-write verification of all cells
-        for (let index = 0; index < contactTableHTML.children.length; index++) {
-          expect(contactTableHTML.rows.namedItem(contactSelected.phone).cells[index].innerText).toBeEqual(contactSelected[Object.values(contactSelected)[index]]);
+        for (let index = 0; index < contactTableHTML.children.length-1; index++) {
+          expect(rowToInspect.cells[index].innerText).toEqual(contactSelected[Object.values(contactSelected)[index]]);
         };
         //test 2: when change phone mean first one delete/free
         if (contact.phone !== contactSelected.phone){
@@ -190,17 +189,17 @@ describe("ContactManager", function() {
         // mock of form via string
         let parser = new DOMParser();
         var strForm = "<form id='ContactForms'> <input type='text' id='inputName' pattern='^.{1,30}$'> <input type='tel' id='inputPhone' pattern='\+[0-9]{2} [0-9]{9}'> <input type='text'  id='inputSurname1' pattern='^.{1,30}$'> <input type='text'  id='inputSurname2' pattern='^.{1,30}$'> <input type='text'  id='inputEmail' pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'> </form>"
-        var contactFormHTML = parser.parseFromString(strForm, 'text/html'); // shrema from html (form + 5 input with id's)
+        var contactFormHTML = parser.parseFromString(strForm, 'text/html').forms[0]; // shrema from html doc (form + 5 input with id's)
 
         // function to test
         CRUDeditAutoFill(contact, contactFormHTML);
 
         // test 1: input fill (not via for bc order)
-        expect(contactFormHTML.elements['inputName'].values).toBeEqual(contact.name);
-        expect(contactFormHTML.elements['inputPhone'].values).toBeEqual(contact.phone);
-        expect(contactFormHTML.elements['inputSurname1'].values).toBeEqual(contact.surname1);
-        expect(contactFormHTML.elements['inputSurname2'].values).toBeEqual(contact.surname2);
-        expect(contactFormHTML.elements['inputEmail'].values).toBeEqual(contact.email);
+        expect(contactFormHTML['inputName'].value).toEqual(contact.name);
+        expect(contactFormHTML['inputPhone'].value).toEqual(contact.phone);
+        expect(contactFormHTML['inputSurname1'].value).toEqual(contact.surname1);
+        expect(contactFormHTML['inputSurname2'].value).toEqual(contact.surname2);
+        expect(contactFormHTML['inputEmail'].value).toEqual(contact.email);
       });
     });
   });
