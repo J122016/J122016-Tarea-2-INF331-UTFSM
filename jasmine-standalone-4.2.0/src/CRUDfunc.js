@@ -1,37 +1,13 @@
-/* TODO : 
-Bugs
-- [required] CRUDremoveContactRow() & CRUDeditContactRow() working func no pass tests, document don't exist in jasmine test...
-- [required] Delete test contact entries with beforeEach? or deactivate iframe.
-
-Improvements:
-- [required] Improve test data cases like 'phone' or email not follow pattern
-- [optional?] test Utils/integration/front functions
-- [optional? UI] Fix front typos & messages regex
+/*Improvements:
+- [optional UX] Auto format and strip forms
 - [optional UX] Add toast for correct transactions
-- [optional UI] Fix some buttons/links
+- [optional UX] modals instead confirm()
 - [internal] improve some functions logic
-- [internal] separe style in html, make a custom css file
+- [view] separe style in html, make a custom css file
 */
 
-
-/* === Integration/middle CRUD storage-front functions === */
-
-function triggerDelete(key) {
-    // try and catch --> toast : https://getbootstrap.com/docs/5.2/components/toasts/
-    let tableContacts = document.getElementById('DynamicContactTable');
-    CRUDremoveContactRow(key, tableContacts);
-    CRUDdeleteContactLocalStorage(key);
-    return;
-}
-
-function triggerEdit(key) {
-    CRUDeditAutoFill(CRUDreadContactLocalStorage(key), document.getElementById("ContactForms"));
-    document.getElementById('v-pills-contact-form-tab').click()
-    // next (save) is merged with only form, worked in function passValidation
-}
-
-
-/* === CRUD storage functions === */
+/* =============================== CRUD storage functions =============================== */
+// Tested with jasmine 'LocalStorage CRUD utils'
 
 /**
  * Create a new contact
@@ -110,7 +86,8 @@ function saveContactLocalStorage(contact){
 };
 
 
-/* === CRUD front functions === */
+/* ================================ CRUD front functions ================================ */
+// Tested with jasmine 'Front Format Utils'
 
 /**
  * Add a contact into html table, DynamicContactTable in theory
@@ -149,9 +126,8 @@ function CRUDaddContactRow(contact, table){
  * @param  {String} key Id/phone of contact to be removed
  * @param {Element} table  table to remove the contact
  */
-function CRUDremoveContactRow(key, table){  
-    //console.log(table,key, document);
-    rowIndex = document.getElementById(key).rowIndex; // improve to work without getElementbyId, jasmine not work properly
+function CRUDremoveContactRow(key, table){
+    rowIndex = table.rows.namedItem(key).rowIndex; // get index from table with only key
     table.deleteRow(rowIndex);
     return;
 };
@@ -183,7 +159,78 @@ function CRUDeditAutoFill(contact, form){
 };
 
 
-/* === Utils functions === */
+/* =================== Integration/middle CRUD storage-front functions =================== */
+// manual tested but internals calls tested with jasmine
+
+function triggerDelete(key) {
+    // try and catch --> toast : https://getbootstrap.com/docs/5.2/components/toasts/
+    let tableContacts = document.getElementById('DynamicContactTable');
+    CRUDremoveContactRow(key, tableContacts);
+    CRUDdeleteContactLocalStorage(key);
+    return;
+}
+
+function triggerEdit(key) {
+    CRUDeditAutoFill(CRUDreadContactLocalStorage(key), document.getElementById("ContactForms"));
+    document.getElementById('v-pills-contact-form-tab').click()
+    // next (save) is merged with only form, worked in function passValidation
+}
+
+// Validation + save integration
+function passValidation() {
+    // Get form
+    contactFormHTML = document.getElementById("ContactForms");
+
+    // default validation
+    let pass = true;
+    document.getElementsByClassName("invalid-feedback-unique-phone")[0].innerText = '';
+    let possibleConflictKey = CRUDreadContactLocalStorage(contactFormHTML['inputPhone'].value) !== null;
+
+    if (!contactFormHTML.checkValidity()) {
+        // patterns not pass
+        contactFormHTML.classList.add('was-validated');
+        pass = false;
+    }
+    else if (possibleConflictKey){
+        // number already register
+        let msg = "Phone already exist.\nDo you wish overwrite contact?, otherwise cancel."
+        if (confirm(msg) === false) {
+            document.getElementsByClassName("invalid-feedback-unique-phone")[0].style.display = 'block';
+            document.getElementsByClassName("invalid-feedback-unique-phone")[0].innerText = String(contactFormHTML['inputPhone'].value) + ' already registered.';
+            pass = false;
+        }
+    }
+
+    if (pass) {
+        //pass - create or edit
+        var contact = CRUDcreate(contactFormHTML['inputName'].value,
+                                contactFormHTML['inputSurname1'].value,
+                                contactFormHTML['inputSurname2'].value,
+                                contactFormHTML['inputPhone'].value,
+                                contactFormHTML['inputEmail'].value);
+        //save
+        saveContactLocalStorage(contact);
+
+        // render
+        var tableContacts = document.getElementById("DynamicContactTable");
+        if(!possibleConflictKey){
+            // Add new entry
+            CRUDaddContactRow(contact, tableContacts);
+        }else{
+            // Edit old entry, accepted before
+            CRUDeditContactRow(contact.phone, contact, tableContacts)
+        }
+        document.getElementById('v-pills-contacts-tab').click();
+
+        //clean
+        contactFormHTML.classList.remove('was-validated');
+        contactFormHTML.reset();
+    }
+    return;
+};
+
+
+/* =================================== Utils functions =================================== */
 
 // load init settings
 function loadDeferred() {
@@ -220,57 +267,4 @@ function changeTheme(){
         document.getElementById('FakeNightMode').style.opacity = 0;
         localStorage.setItem('NightMode', false);
     }
-};
-
-// Validation + save integration - manual tested, internals calls with jasmine
-function passValidation() {
-    // Get form
-    contactFormHTML = document.getElementById("ContactForms");
-
-    // default validation
-    let pass = true;
-    document.getElementsByClassName("invalid-feedback-unique-phone")[0].innerText = '';
-    let possibleConflictKey = CRUDreadContactLocalStorage(contactFormHTML['inputPhone'].value) !== null;
-
-    if (!contactFormHTML.checkValidity()) {
-        // patterns not pass
-        contactFormHTML.classList.add('was-validated');
-        pass = false;
-    }
-    else if (possibleConflictKey){
-        // number already register
-        let msg = "Phone already exist.\Do you wish overwrite contact?, otherwise cancel."
-        if (confirm(msg) === false) {
-            document.getElementsByClassName("invalid-feedback-unique-phone")[0].style.display = 'block';
-            document.getElementsByClassName("invalid-feedback-unique-phone")[0].innerText = String(contactFormHTML['inputPhone'].value) + ' already registered.';
-            pass = false;
-        }
-    }
-
-    if (pass) {
-        //pass - create or edit
-        var contact = CRUDcreate(contactFormHTML['inputName'].value,
-                                contactFormHTML['inputSurname1'].value,
-                                contactFormHTML['inputSurname2'].value,
-                                contactFormHTML['inputPhone'].value,
-                                contactFormHTML['inputEmail'].value);
-        //save
-        saveContactLocalStorage(contact);
-
-        // render
-        var tableContacts = document.getElementById("DynamicContactTable");
-        if(!possibleConflictKey){
-            // Add new entry
-            CRUDaddContactRow(contact, tableContacts);
-        }else{
-            // Edit old entry, accepted before
-            CRUDeditContactRow(contact.phone, contact, tableContacts)
-        }
-        document.getElementById('v-pills-contacts-tab').click();
-
-        //clean
-        contactFormHTML.classList.remove('was-validated');
-        contactFormHTML.reset();
-    }
-    return;
 };
