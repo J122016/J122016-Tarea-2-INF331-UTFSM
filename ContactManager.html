@@ -56,7 +56,7 @@
       <div class="d-flex align-items-start">
         <!-- Nav bar -->
         <div class="nav flex-column nav-pills me-3 py-5 sticky-sm-top" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <button class="nav-link active" id="v-pills-contacts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contacts" type="button" role="tab" aria-controls="v-pills-contacts" aria-selected="true">
+          <button class="nav-link active" id="v-pills-contacts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contacts" type="button" role="tab" aria-controls="v-pills-contacts" aria-selected="true" autofocus>
             Contacts
           </button>
           <button class="nav-link" id="v-pills-contact-form-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contact-form" type="button" role="tab" aria-controls="v-pills-contact-form" aria-selected="false">
@@ -110,7 +110,7 @@
 
             </br>
             <div class="container">
-              <button type="button" class="btn btn-danger btn-sm mx-1" style="float: right;" onclick="localStorage.clear();location.reload()">
+              <button type="button" name="DELETE ALL APP DATA" class="btn btn-danger btn-sm mx-1" style="float: right;" onclick="localStorage.clear();location.reload()">
                 <i class="bi bi-exclamation-octagon"></i>
                 Delete all app data
               </button>
@@ -182,7 +182,7 @@
               </div>
               <!-- submit button -->
               <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-outline-primary" type="submit" onclick="passValidation()"> 
+                <button name="Save contact" class="btn btn-outline-primary" type="submit" onclick="passValidation()"> 
                   Save contact <i class="bi bi-upload ps-3" style="vertical-align: inherit;"></i>
                 </button>
               </div>
@@ -192,7 +192,7 @@
           <!-- Jasmine Tests should load at last -->
           <div class="flex-grow-1 tab-pane fade" id="v-pills-tests" role="tabpanel" aria-labelledby="v-pills-tests-tab" style="min-width: max-content;">
             <iframe title="JasmineTests" id="JasmineTestIframe" width="100%" height="290px" src="TestRunner.html" ></iframe>
-            <a class="btn btn-primary mx-auto mt-3" href="TestRunner.html" target="_blank" rel="noopener noreferrer" style="background-color: #8a4182;border-color: #683062;float: right;">
+            <a class="btn btn-primary mx-auto mt-3" name="Open Jasmine Tab" href="TestRunner.html" target="_blank" rel="noopener noreferrer" style="background-color: #8a4182;border-color: #683062;float: right;">
               Open tests in a new tab <i class="bi bi-box-arrow-up-right"></i>
             </a>
           </div>

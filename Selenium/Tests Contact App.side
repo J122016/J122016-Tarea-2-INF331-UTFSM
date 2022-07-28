@@ -1,0 +1,1239 @@
+{
+  "id": "62f1d2b3-3013-4333-ab34-e69e7d60d58d",
+  "version": "2.0",
+  "name": "Tests Contact App",
+  "url": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+  "tests": [{
+    "id": "b9ccb947-06c9-42d1-8068-995593b7b4d7",
+    "name": "SetUpTearDown_CleanApp",
+    "commands": [{
+      "id": "cf75c9b8-0182-498d-b027-fbf8f9a971ed",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0ce288df-c624-44f1-9df1-634ace30fd68",
+      "comment": "Cleaning old app data",
+      "command": "click",
+      "target": "name=DELETE ALL APP DATA",
+      "targets": [
+        ["name=DELETE ALL APP DATA", "name"],
+        ["css=.btn-danger", "css:finder"],
+        ["xpath=//button[@name='DELETE ALL APP DATA']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-contacts']/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,' Delete all app data')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6006db5f-3eac-4d18-8715-b872a9ca7056",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//div[@id='DynamicContactTable-tbody']",
+      "targets": [
+        ["id=v-pills-contacts", "id"],
+        ["css=#v-pills-contacts", "css:finder"],
+        ["xpath=//div[@id='v-pills-contacts']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tabContent']/div", "xpath:idRelative"],
+        ["xpath=//div[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "890a1ca3-87e3-4e6c-bb4d-94c41c60f2f0",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "3104e484-731b-4f45-8c71-ca9a5a127cfd",
+    "name": "AgregarContacto",
+    "commands": [{
+      "id": "8049e536-38f6-4970-9b55-52c83bd427ac",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4ab503a8-e9c5-4791-9b5e-1788636479ca",
+      "comment": "",
+      "command": "click",
+      "target": "id=v-pills-contact-form-tab",
+      "targets": [
+        ["id=v-pills-contact-form-tab", "id"],
+        ["css=#v-pills-contact-form-tab", "css:finder"],
+        ["xpath=//button[@id='v-pills-contact-form-tab']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'New contact')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1795dbc-061e-4c46-94de-abbc85c99cd3",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "aa241f72-a592-4099-87b9-237671948352",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquier nombre"
+    }, {
+      "id": "790fda49-d427-42cf-8ac3-5f07e9ba4e38",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputPhone",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a925d109-3263-4021-947a-e4e5398dff18",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputPhone",
+      "targets": [
+        ["id=inputPhone", "id"],
+        ["css=#inputPhone", "css:finder"],
+        ["xpath=//input[@id='inputPhone']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "no valido"
+    }, {
+      "id": "f5fe2b3f-484c-4dc5-a074-a0cd6fc9377f",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9fa636d3-4f49-4e35-a7b5-3985ba09afa6",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputSurname1", "id"],
+        ["css=#inputSurname1", "css:finder"],
+        ["xpath=//input[@id='inputSurname1']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquiera"
+    }, {
+      "id": "8a8b5881-fdbf-4d76-b7dd-b3c8f0e73c6d",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d454e759-94e8-4565-aaec-b476b9466214",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputSurname2", "id"],
+        ["css=#inputSurname2", "css:finder"],
+        ["xpath=//input[@id='inputSurname2']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "apellido"
+    }, {
+      "id": "e55b3d15-a95c-47f3-aad9-677259356809",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef158494-7e71-48e0-b9d2-268bd1bb17f5",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "correo@valido.com"
+    }, {
+      "id": "1acf016d-1b59-4a51-af69-0f543c0095cc",
+      "comment": "",
+      "command": "click",
+      "target": "name=Save contact",
+      "targets": [
+        ["css=.btn-outline-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save contact ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a2622686-5cbe-4674-b07a-3f0106c52948",
+      "comment": "",
+      "command": "click",
+      "target": "id=v-pills-contacts-tab",
+      "targets": [
+        ["id=v-pills-contacts-tab", "id"],
+        ["css=#v-pills-contacts-tab", "css:finder"],
+        ["xpath=//button[@id='v-pills-contacts-tab']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Contacts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "66530ae3-df67-4a4c-9cac-2d82a564a2d6",
+      "comment": "",
+      "command": "click",
+      "target": "id=v-pills-contact-form-tab",
+      "targets": [
+        ["id=v-pills-contact-form-tab", "id"],
+        ["css=#v-pills-contact-form-tab", "css:finder"],
+        ["xpath=//button[@id='v-pills-contact-form-tab']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'New contact')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a0e4be8-d380-4dae-a168-214c73af0776",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputPhone",
+      "targets": [
+        ["id=inputPhone", "id"],
+        ["css=#inputPhone", "css:finder"],
+        ["xpath=//input[@id='inputPhone']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dfa4697c-9b9f-4d72-ac63-2a3484c6578d",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputPhone",
+      "targets": [
+        ["id=inputPhone", "id"],
+        ["css=#inputPhone", "css:finder"],
+        ["xpath=//input[@id='inputPhone']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "+12 123456789"
+    }, {
+      "id": "fda6b8c7-d10c-4582-a1e7-ca8fe1f6e932",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cdc7ede1-8acf-48fa-b751-bcd300e48bc8",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "correoNOvalido.com"
+    }, {
+      "id": "a21fcf11-d9e1-458a-9033-e70d84ad2209",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-outline-primary",
+      "targets": [
+        ["css=.btn-outline-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save contact ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3b76d84a-de75-40a4-b116-3be7c6f1013f",
+      "comment": "",
+      "command": "click",
+      "target": "id=v-pills-contacts-tab",
+      "targets": [
+        ["id=v-pills-contacts-tab", "id"],
+        ["css=#v-pills-contacts-tab", "css:finder"],
+        ["xpath=//button[@id='v-pills-contacts-tab']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Contacts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b10a61b-7ba9-4eb4-a9dc-84fafcbca2d7",
+      "comment": "",
+      "command": "click",
+      "target": "id=v-pills-contact-form-tab",
+      "targets": [
+        ["id=v-pills-contact-form-tab", "id"],
+        ["css=#v-pills-contact-form-tab", "css:finder"],
+        ["xpath=//button[@id='v-pills-contact-form-tab']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'New contact')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a102d0b9-ea6d-4740-bf45-70854fddc741",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f3dd1381-20d0-4e66-989c-f26623701ec5",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "correo@valido.com"
+    }, {
+      "id": "10cbe4cd-aa7a-4b76-b139-d86abb447f6b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-outline-primary",
+      "targets": [
+        ["css=.btn-outline-primary", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save contact ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c97046f4-7b2f-4bb7-afa2-1dfcf48510d6",
+      "comment": "",
+      "command": "click",
+      "target": "id=v-pills-contacts-tab",
+      "targets": [
+        ["id=v-pills-contacts-tab", "id"],
+        ["css=#v-pills-contacts-tab", "css:finder"],
+        ["xpath=//button[@id='v-pills-contacts-tab']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Contacts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d675591c-1cc2-46a7-aac9-9385a5693c3e",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[1]",
+      "targets": [
+        ["css=td:nth-child(1)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'cualquier nombre')]", "xpath:innerText"]
+      ],
+      "value": "cualquier nombre"
+    }, {
+      "id": "5a2ea9f2-f7a9-42d6-8644-d1e74d97fcba",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[2]",
+      "targets": [
+        ["css=td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[2]", "xpath:idRelative"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'cualquiera')]", "xpath:innerText"]
+      ],
+      "value": "cualquiera"
+    }, {
+      "id": "9afd910d-0a03-4d37-b1f5-c839537237e3",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[3]",
+      "targets": [
+        ["css=td:nth-child(3)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[3]", "xpath:idRelative"],
+        ["xpath=//td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'apellido')]", "xpath:innerText"]
+      ],
+      "value": "apellido"
+    }, {
+      "id": "f5f88fee-1081-4883-9259-b079d7a67916",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[4]",
+      "targets": [
+        ["css=td:nth-child(4)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[4]", "xpath:idRelative"],
+        ["xpath=//td[4]", "xpath:position"],
+        ["xpath=//td[contains(.,'correo@valido.com')]", "xpath:innerText"]
+      ],
+      "value": "correo@valido.com"
+    }, {
+      "id": "adcb8708-30bf-4570-b607-6fa2db3029f8",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[5]",
+      "targets": [
+        ["css=td:nth-child(5)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[5]", "xpath:idRelative"],
+        ["xpath=//td[5]", "xpath:position"],
+        ["xpath=//td[contains(.,'+12 123456789')]", "xpath:innerText"]
+      ],
+      "value": "+12 123456789"
+    }, {
+      "id": "e7be3b79-ffd1-464e-8501-967c6eddfc7e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "0714f704-087f-4364-9fc5-22b88821dd6a",
+    "name": "EditarContactoCorrectamenteSinNum",
+    "commands": [{
+      "id": "4815c5d4-daff-4a9e-8a8b-db1c3c8adc83",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "43817f2b-177a-48f4-a99c-03c380a7ac76",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//tr[@id='+12 123456789']/td[6]/button",
+      "targets": [
+        ["css=.btn-outline-success", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//tr[@id='+12 123456789']/td[6]/button", "xpath:idRelative"],
+        ["xpath=//td[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,' Edit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "49c892b1-d41e-4d48-bed2-4cdfe14b279d",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2bbb6936-ed8d-443c-8eee-e6e5fb6ad0dc",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquier nombre modificado"
+    }, {
+      "id": "b9b0ed39-7018-4695-92f1-09ec5115ee0e",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fe1eb775-cac4-4685-b21e-45a1eee40b9a",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "correoModificado@valido.com"
+    }, {
+      "id": "a017d460-9a56-4f57-ad7f-2676480fb1fb",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputSurname1", "id"],
+        ["css=#inputSurname1", "css:finder"],
+        ["xpath=//input[@id='inputSurname1']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9f56ecd-c964-40f7-a684-6c0bf9bd2840",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputSurname1", "id"],
+        ["css=#inputSurname1", "css:finder"],
+        ["xpath=//input[@id='inputSurname1']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquieraModificado"
+    }, {
+      "id": "1e644fec-6b0a-4688-9c63-926c8201789b",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputSurname2", "id"],
+        ["css=#inputSurname2", "css:finder"],
+        ["xpath=//input[@id='inputSurname2']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eaf2a1ad-9ddc-45aa-a9d5-981b3f49e253",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputSurname2", "id"],
+        ["css=#inputSurname2", "css:finder"],
+        ["xpath=//input[@id='inputSurname2']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "apellidoModificado"
+    }, {
+      "id": "73269539-60af-49a0-ba42-d0a2ae77da42",
+      "comment": "",
+      "command": "click",
+      "target": "name=Save contact",
+      "targets": [
+        ["name=Save contact", "name"],
+        ["css=.btn-outline-primary", "css:finder"],
+        ["xpath=//button[@name='Save contact']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save contact ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ddf34afd-34c5-4275-ba42-abd9988a04e3",
+      "comment": "",
+      "command": "chooseOkOnNextConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d2bb2383-5203-474f-a06b-27704e7ca536",
+      "comment": "",
+      "command": "assertConfirmation",
+      "target": "Phone already exist.\nDo you wish overwrite contact?, otherwise cancel.",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ef15865b-de9b-46fd-b995-388d5ddecde6",
+      "comment": "",
+      "command": "webdriverChooseOkOnVisibleConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "91347ca7-2a3f-40d6-8d2b-7212aca346f4",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[1]",
+      "targets": [
+        ["css=td:nth-child(1)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'cualquier nombre modificado')]", "xpath:innerText"]
+      ],
+      "value": "cualquier nombre modificado"
+    }, {
+      "id": "c53c5d2a-c6bf-400d-bb0a-86b6dfa39bb1",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[2]",
+      "targets": [],
+      "value": "cualquieraModificado"
+    }, {
+      "id": "d25d6cd7-0896-4991-acf1-9384fe8c2237",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[3]",
+      "targets": [],
+      "value": "apellidoModificado"
+    }, {
+      "id": "a94d8dbd-1908-4a73-820a-21f9627432df",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[4]",
+      "targets": [],
+      "value": "correoModificado@valido.com"
+    }, {
+      "id": "dcfcb730-6a35-494e-87dc-3e735017a869",
+      "comment": "",
+      "command": "//assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[5]",
+      "targets": [],
+      "value": "+12 123456789"
+    }, {
+      "id": "0584af46-e3f5-405d-9707-dafe1e244db8",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "f0f98efb-c0d3-4104-a7c9-70cf3388b58e",
+    "name": "EliminarContacto",
+    "commands": [{
+      "id": "c560b3a0-0272-479d-92f7-9b76b20b103b",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4d5a5cab-bc70-4ae3-bfae-6ee6730d5943",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//tr[@id='+12 123456789']/td[6]/button[2]",
+      "targets": [
+        ["css=#\\+12\\ 123456789 .btn-outline-danger", "css:finder"],
+        ["xpath=(//button[@type='button'])[5]", "xpath:attributes"],
+        ["xpath=//tr[@id='+12 123456789']/td[6]/button[2]", "xpath:idRelative"],
+        ["xpath=//td[6]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,' Delete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef892ba1-6fd4-419f-8f96-0fee95cb471c",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//tr[@id='+12 123456789']/td",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0f499391-d84b-4f3c-9020-b56ce9f3c5b6",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "41cdfc0b-5747-4970-a945-19097bc3cba8",
+    "name": "EditarContactoFallidoSinReemplazar",
+    "commands": [{
+      "id": "608aa73d-ffba-4f7e-a663-0a5456427e1f",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2af97626-bf4b-4441-902a-7e5ea78a4df5",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//tr[@id='+12 123456789']/td[6]/button",
+      "targets": [
+        ["css=.btn-outline-success", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//tr[@id='+12 123456789']/td[6]/button", "xpath:idRelative"],
+        ["xpath=//td[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,' Edit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2aef4ac6-98e5-415c-a836-b28dc132154f",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7ddd8b2e-1204-46b4-bd67-08eba5f1a9a7",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquier nombre modificado"
+    }, {
+      "id": "50f1b336-4eb1-415f-ae8b-d121f684b69e",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "42b30a6e-4123-453a-b070-02b81d621ddf",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "correoModificado@valido.com"
+    }, {
+      "id": "46e9c26e-bbd8-4eba-98e7-5a7a38411b25",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputSurname1", "id"],
+        ["css=#inputSurname1", "css:finder"],
+        ["xpath=//input[@id='inputSurname1']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "276a11a5-3fbf-47c3-819e-9a9447fe5170",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputSurname1", "id"],
+        ["css=#inputSurname1", "css:finder"],
+        ["xpath=//input[@id='inputSurname1']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquieraModificado"
+    }, {
+      "id": "b6999e42-2f30-472d-a7bd-920b3e63b36c",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputSurname2", "id"],
+        ["css=#inputSurname2", "css:finder"],
+        ["xpath=//input[@id='inputSurname2']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "716b541d-2fab-4870-ad9a-8f2a38ae7f63",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputSurname2", "id"],
+        ["css=#inputSurname2", "css:finder"],
+        ["xpath=//input[@id='inputSurname2']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "apellidoModificado"
+    }, {
+      "id": "471ece8b-1cc9-4acb-a0a0-abeb08fa6245",
+      "comment": "",
+      "command": "click",
+      "target": "name=Save contact",
+      "targets": [
+        ["name=Save contact", "name"],
+        ["css=.btn-outline-primary", "css:finder"],
+        ["xpath=//button[@name='Save contact']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save contact ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c220aff5-07df-46f1-8c29-2491f146a1f2",
+      "comment": "",
+      "command": "chooseCancelOnNextPrompt",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9a91bbcc-ae97-43a8-8030-e8d6955f0d91",
+      "comment": "",
+      "command": "assertConfirmation",
+      "target": "Phone already exist.\nDo you wish overwrite contact?, otherwise cancel.",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6cb3b313-9bdf-4782-9d14-3ea398620095",
+      "comment": "",
+      "command": "webdriverChooseCancelOnVisiblePrompt",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5edc8875-a43e-4881-bfa9-45c19691dd2c",
+      "comment": "",
+      "command": "//revisando cambios no fueron realizados",
+      "target": "id=v-pills-contacts-tab",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "64ec4e83-9de4-448b-bafc-491321057db7",
+      "comment": "",
+      "command": "click",
+      "target": "id=v-pills-contacts-tab",
+      "targets": [
+        ["id=v-pills-contacts-tab", "id"],
+        ["css=#v-pills-contacts-tab", "css:finder"],
+        ["xpath=//button[@id='v-pills-contacts-tab']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Contacts')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a1d23630-ee9f-4108-9671-0e50a5e24b89",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[1]",
+      "targets": [],
+      "value": "cualquier nombre"
+    }, {
+      "id": "635d33d0-944b-4b08-afe4-b7dee617185b",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[2]",
+      "targets": [
+        ["css=td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[2]", "xpath:idRelative"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'cualquieraModificado')]", "xpath:innerText"]
+      ],
+      "value": "cualquiera"
+    }, {
+      "id": "ddd36886-913e-4e71-a1ad-65fdd7e0dbfb",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[3]",
+      "targets": [
+        ["css=td:nth-child(3)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[3]", "xpath:idRelative"],
+        ["xpath=//td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'apellidoModificado')]", "xpath:innerText"]
+      ],
+      "value": "apellido"
+    }, {
+      "id": "d581ae25-6949-4ac1-9149-1ac44bf405f8",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[4]",
+      "targets": [
+        ["css=td:nth-child(4)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[4]", "xpath:idRelative"],
+        ["xpath=//td[4]", "xpath:position"],
+        ["xpath=//td[contains(.,'correoModificado@valido.com')]", "xpath:innerText"]
+      ],
+      "value": "correo@valido.com"
+    }, {
+      "id": "d44b34c4-3550-455a-9cf7-acc8bbb76a24",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[5]",
+      "targets": [
+        ["css=td:nth-child(5)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td[5]", "xpath:idRelative"],
+        ["xpath=//td[5]", "xpath:position"],
+        ["xpath=//td[contains(.,'+12 123456789')]", "xpath:innerText"]
+      ],
+      "value": "+12 123456789"
+    }, {
+      "id": "b7457bb7-0473-4f7d-b6d4-a188dd0fb2a3",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "11109a0f-0537-496a-80c8-43158eedd6de",
+    "name": "EditarContactoTelefono",
+    "commands": [{
+      "id": "278cdce7-85bd-4b2e-8c65-b7e0287e3f4f",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "634c79d2-07c3-4aba-866c-fb38587b488b",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//tr[@id='+12 123456789']/td[6]/button",
+      "targets": [
+        ["css=.btn-outline-success", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//tr[@id='+12 123456789']/td[6]/button", "xpath:idRelative"],
+        ["xpath=//td[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,' Edit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e0f34989-7ca7-431c-b48c-20bcdfb5caa9",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputPhone",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5f93ccdc-2046-4bde-a516-4d3836ea4644",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputPhone",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": "+12 987654321"
+    }, {
+      "id": "29638630-17c0-40e2-80b3-2b3ab75cd1eb",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2fe94b86-3221-4685-982e-02f1fd4d159f",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputName",
+      "targets": [
+        ["id=inputName", "id"],
+        ["css=#inputName", "css:finder"],
+        ["xpath=//input[@id='inputName']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquier nombre modificado"
+    }, {
+      "id": "5c83638f-287e-4dba-bc2f-dd004b4e10ae",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "63aceee3-826d-477f-a8eb-0e046e6b0fec",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputEmail",
+      "targets": [
+        ["id=inputEmail", "id"],
+        ["css=#inputEmail", "css:finder"],
+        ["xpath=//input[@id='inputEmail']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "correoModificado@valido.com"
+    }, {
+      "id": "01a9aa7c-acd0-4501-aa3d-b3f1354a4f59",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputSurname1", "id"],
+        ["css=#inputSurname1", "css:finder"],
+        ["xpath=//input[@id='inputSurname1']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "74c4e5ad-7ee3-4a5e-b4d5-79c58f83a10a",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname1",
+      "targets": [
+        ["id=inputSurname1", "id"],
+        ["css=#inputSurname1", "css:finder"],
+        ["xpath=//input[@id='inputSurname1']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "cualquieraModificado"
+    }, {
+      "id": "60c3f3b1-44f7-477c-ab54-418195b4e8a2",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputSurname2", "id"],
+        ["css=#inputSurname2", "css:finder"],
+        ["xpath=//input[@id='inputSurname2']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "08303e2d-b43a-4216-a6be-28437c52b829",
+      "comment": "",
+      "command": "type",
+      "target": "id=inputSurname2",
+      "targets": [
+        ["id=inputSurname2", "id"],
+        ["css=#inputSurname2", "css:finder"],
+        ["xpath=//input[@id='inputSurname2']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/div/input", "xpath:position"]
+      ],
+      "value": "apellidoModificado"
+    }, {
+      "id": "696e509f-2db2-4870-a54c-46449f654b27",
+      "comment": "",
+      "command": "click",
+      "target": "name=Save contact",
+      "targets": [
+        ["name=Save contact", "name"],
+        ["css=.btn-outline-primary", "css:finder"],
+        ["xpath=//button[@name='Save contact']", "xpath:attributes"],
+        ["xpath=//form[@id='ContactForms']/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save contact ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a37f2c51-9aeb-41a2-89e6-07117e1c31ba",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 987654321']/td[1]",
+      "targets": [
+        ["css=td:nth-child(1)", "css:finder"],
+        ["xpath=//tr[@id='+12 123456789']/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'cualquier nombre modificado')]", "xpath:innerText"]
+      ],
+      "value": "cualquier nombre modificado"
+    }, {
+      "id": "dfd33363-1ef8-4f65-9f28-e433b13c1513",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 987654321']/td[2]",
+      "targets": [],
+      "value": "cualquieraModificado"
+    }, {
+      "id": "1915d436-a8c1-4b3b-83cb-45926366948f",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 987654321']/td[3]",
+      "targets": [],
+      "value": "apellidoModificado"
+    }, {
+      "id": "2f0510ef-40fd-47be-8249-835f7538967c",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 987654321']/td[4]",
+      "targets": [],
+      "value": "correoModificado@valido.com"
+    }, {
+      "id": "f5d3d2b9-b906-4ca4-88fb-8e88546f49ce",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//tr[@id='+12 987654321']/td[5]",
+      "targets": [],
+      "value": "+12 987654321"
+    }, {
+      "id": "d3ae8d11-fd82-4313-bbc8-b3f9c260db70",
+      "comment": "",
+      "command": "//por supuestos no se borra el contacto anterior, puede cambiar a futuro",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "94da0889-1ae7-4d5a-86d8-2173d93671d2",
+      "comment": "",
+      "command": "//assertText",
+      "target": "xpath=//tr[@id='+12 123456789']/td[1]",
+      "targets": [],
+      "value": "cualquier nombre"
+    }, {
+      "id": "4c52fef2-9812-42a1-9e6d-372f131aadf5",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "899da1aa-592d-4b6c-9a93-8d91fd1729a4",
+    "name": "SetUpTearDown_CleanApp (1)",
+    "commands": [{
+      "id": "f3f0de09-5805-4151-ad04-72c8d471fae5",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b606ca51-27c4-4cb1-8f1d-1447b348907b",
+      "comment": "Cleaning old app data",
+      "command": "click",
+      "target": "name=DELETE ALL APP DATA",
+      "targets": [
+        ["name=DELETE ALL APP DATA", "name"],
+        ["css=.btn-danger", "css:finder"],
+        ["xpath=//button[@name='DELETE ALL APP DATA']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-contacts']/div/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,' Delete all app data')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "07fcb5d8-23f1-49dd-b2af-c44da477a0fe",
+      "comment": "",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//div[@id='DynamicContactTable-tbody']",
+      "targets": [
+        ["id=v-pills-contacts", "id"],
+        ["css=#v-pills-contacts", "css:finder"],
+        ["xpath=//div[@id='v-pills-contacts']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tabContent']/div", "xpath:idRelative"],
+        ["xpath=//div[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b406f384-15e6-43c6-8061-fbabb0caf70e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "4219c8b4-f2ca-488c-847e-2e7f9eb602b9",
+    "name": "ContactAppCRUDTests",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["b9ccb947-06c9-42d1-8068-995593b7b4d7", "3104e484-731b-4f45-8c71-ca9a5a127cfd", "41cdfc0b-5747-4970-a945-19097bc3cba8", "0714f704-087f-4364-9fc5-22b88821dd6a", "11109a0f-0537-496a-80c8-43158eedd6de", "f0f98efb-c0d3-4104-a7c9-70cf3388b58e", "899da1aa-592d-4b6c-9a93-8d91fd1729a4"]
+  }],
+  "urls": ["file:///C:/Users/Dinko/Desktop/U%20temp/2022-1/INF%20331%20-%20PSW/P1%20CRUD%20contactos/J122016-Tarea-2-INF331-UTFSM//ContactManager.html"],
+  "plugins": []
+}

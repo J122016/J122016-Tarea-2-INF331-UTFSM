@@ -1,0 +1,37 @@
+2022-07-28 13:59:25,639 | Executing all test, actions flow (CRUD, implicit Read) in normal order...
+2022-07-28 13:59:25,640 | 0.0/4 - Setup driver...
+2022-07-28 13:59:30,327 | 0.1/4 - Cleaning old data
+2022-07-28 13:59:31,866 | -> 'Test' test_setUpTearDownCleanApp completado correctamente!
+----
+2022-07-28 13:59:31,867 | 1.0/4 - Add new contact
+2022-07-28 13:59:31,868 | - Intentando agregar un contacto con datos invalidos
+2022-07-28 13:59:34,950 | - Verificando que no se añadio a la tabla 1/2
+2022-07-28 13:59:35,821 | - Variando otros campos para invalidez
+2022-07-28 13:59:37,286 | - Verificando que no se añadio a la tabla 2/2
+2022-07-28 13:59:40,392 | - Agregando un contacto correctamente
+2022-07-28 13:59:41,568 | - Validando  datos del contacto guardado
+2022-07-28 13:59:42,532 | -> Test test_agregarContacto completado correctamente!
+----
+2022-07-28 13:59:42,535 | 2.0/4 - Edit contact but retracted to avoid overwrite
+2022-07-28 13:59:42,540 | - Intentando agregar un nuevo contacto con telefono/id ya existente
+2022-07-28 13:59:44,755 | - Rechazando sobreescritura
+2022-07-28 13:59:44,785 | - Revisando datos no fueron sobreescritos
+2022-07-28 13:59:46,039 | -> Test test_editarContactoFallidoSinReemplazar completado correctamente!
+----
+2022-07-28 13:59:46,048 | 2.1/4 - Edit contact, overwrite old
+2022-07-28 13:59:46,053 | - Editando un nuevo contacto manteniendo telefono/id
+2022-07-28 13:59:47,864 | - Aceptando sobreescritura
+2022-07-28 13:59:47,900 | - Revisando datos fueron sobreescritos
+2022-07-28 13:59:48,823 | -> Test test_editarContactoCorrectamenteSinTel completado correctamente!
+----
+2022-07-28 13:59:48,826 | 2.3/4 - Edit contact with new phone/id, add new one & keep old ?
+2022-07-28 13:59:48,831 | - Editando un nuevo contacto cambiando telefono/id
+2022-07-28 13:59:50,920 | - Revisando contacto fue agregado, el entiguo se maniene por suposición?
+2022-07-28 13:59:51,832 | -> Test test_editarContactoTel completado correctamente!
+----
+2022-07-28 13:59:51,837 | 3/4 - Delete an existing contact
+2022-07-28 13:59:52,083 | - Comprobando que no se muestra contacto
+2022-07-28 13:59:55,117 | 4/4 - Cleaning data...
+2022-07-28 13:59:59,090 | -> 'Test' test_setUpTearDownCleanApp completado correctamente!
+----
+2022-07-28 14:00:01,777 | Tests passed!
