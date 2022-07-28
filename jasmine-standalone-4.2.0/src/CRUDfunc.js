@@ -2,6 +2,7 @@
 - [optional UX] Auto format and strip forms
 - [optional UX] Add toast for correct transactions
 - [optional UX] modals instead confirm()
+- [optional UX] improve accesibility for buttons edit/delete
 - [internal] improve some functions logic
 - [view] separe style in html, make a custom css file
 */
